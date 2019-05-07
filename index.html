@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Links from JSON file</title>
+</head>
+<body>
+  <h2>List of links extracted from JSON file</h2>
+  <ul id="obj"></ul>
+  <script>
+    let request = new XMLHttpRequest();
+    request.open('GET', 'test.json', true);
+      request.onload = function () {
+      // Convert JSON data to an object
+      let obj = JSON.parse(this.response);
+      let output = '';
+      
+      for (	var i = 0; i < obj.length; i++) {
+
+        output += '<li>' + '<a href="https://' 
+        + obj[i].url + ' " target="_blank">'+obj[i].name+'</a>'+'</li>'; 
+
+        document.getElementById('obj').innerHTML = '<ol>'+output+'</ol>';
+      }
+      
+    }
+        request.send();
+</script>
+</body>
+</html>
